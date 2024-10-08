@@ -156,3 +156,18 @@ The plugin name can also **_optionally have a hostname_** is front. The hostname
 ```
 
 By default terraform installs the **latest version** of the provider. We can lock down our configuration files to make use of a specific provider version as well.
+
+# Configuration Directory
+
+We can create multiple configuration files in a single directory (configuration directory). When applied terraform will consider every file with the `.tf` extension within the configuration directory.
+
+Another common practice is to have **single configuration file that contains all the resource blocks** required to provision the infrastructure. A single configuration file can have as many configuration blocks as you need. A common naming convention used for such configuration file is `main.tf`.
+
+There are multiple types of configuration files that can be created within a directory.
+
+| File name      | Purpose                                                |
+| -------------- | ------------------------------------------------------ |
+| `main.tf`      | Main configuration file containing resource definition |
+| `variables.tf` | Contains variable declarations                         |
+| `outputs.tf`   | Contains outputs from the resources                    |
+| `provider.tf`  | Containers provider definition                         |
