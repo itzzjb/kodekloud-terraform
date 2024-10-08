@@ -128,8 +128,31 @@ Terraform uses a plugin based architecture to work with hundreds of such infrast
 
 There are 3 tiers of providers.
 
-| Provider            | Examples                            | Description                                                                                                                          |
-| ------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Official Provider   | AWS, GCP, Azure, Local              | These are owned and maintained by HashiCorp.                                                                                         |
-| Verified Provider   | bigip, heroku, digitalocean         | These are owned and maintained by a third party technology company, that has gone through a partner provider process with HashiCorp. |
-| Community Providers | activedirectory, ucloud, netapp-gcp | These are published and maintained by individual contributors of the HashiCorp community.                                            |
+| Provider                | Examples                            | Description                                                                                                                          |
+| ----------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Official** Provider   | AWS, GCP, Azure, Local              | These are owned and maintained by HashiCorp.                                                                                         |
+| **Verified** Provider   | bigip, heroku, digitalocean         | These are owned and maintained by a third party technology company, that has gone through a partner provider process with HashiCorp. |
+| **Community** Providers | activedirectory, ucloud, netapp-gcp | These are published and maintained by individual contributors of the HashiCorp community.                                            |
+
+The output of the `terraform init` command shows the version of the plugin as well.
+
+The plugins are downloaded into a hidden directory called `.terraform/plugins` in the working directory containing the configuration files.
+
+The plugin name that we can see in the output of the `terraform init` command is also known as the **source address**. This is an identifier that is used by terraform to locate and download the plugin from the registry.
+
+Let's take the example,
+
+```sh
+* hashicorp/local: version = "~> 2.00"
+```
+
+**hashicorp**: organizational namespace
+**local**: type (name of the provider)
+
+The plugin name can also **_optionally have a hostname_** is front. The hostname is the name of the name of the registry where the plugin is located. If omitted it defaults to `registry.terraform.io` which is HashiCorp's public registry.
+
+```sh
+* registry.terraform.io/hashicorp/local: version = "~> 2.00"
+```
+
+By default terraform installs the **latest version** of the provider. We can lock down our configuration files to make use of a specific provider version as well.
