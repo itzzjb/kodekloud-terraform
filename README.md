@@ -32,3 +32,17 @@ Even thought we can possibly make use of any of these tools to design similar so
 | Configuration Management | Ansible, Chef, Puppet, Salt Stack           | Commonly **used to install and manage software on existing infrastructure resources**. These tools maintain a consistent and standard structure of code. These can be checked into a version control repository. Most important feature is that they are **idempotent**. This means that you can run the code multiple times, and every time you run it will only make changes that are necessary to bring the environment to a defined state. |
 | Server Templating        | Docker, HashiCorp Packer, HashiCorp Vagrant | Can be used to **create custom image of a virtual machine or a container**. These images already contain all the software and dependencies that is required already on them. ( custom AMIs in AWS, docker images in dockerhub). These also promote **immutable** infrastructure. We update the image and redeploy a new instance using the updated image.                                                                                      |
 | Provisioning Tools       | HashiCorp Terraform, Cloud Formation        | These tools are **used to provision infrastructure components using a simple declarative code**. While cloud formation is specifically designed to deploy services in AWS, terraform support provider plugins for almost all major cloud providers.                                                                                                                                                                                            |
+
+# Terraform
+
+Terraform ia a IaC tool which is specifically useful as a infrastructure provisioning tool. This is a free and open-source tool.
+
+One of the biggest advantage of terraform is it's **ability to deploy infrastructure across multiple platforms including private and public clouds**. This is achieved through **providers**.
+
+Provider helps terraform manage third party platforms through their API. The third party platforms may be cloud platforms,network infrastructure, monitoring and data management tools, databases and version control systems.
+
+Terraform uses **HCL (HashiCorp Configuration Language)** which is a simple declarative language to define the infrastructure resources to be provisioned as blocks of code. All of these resources can be defined within configuration files that has a **.tf** extension.
+
+These codes are declarative and can be maintained in a version control system.
+
+### Declarative ?
