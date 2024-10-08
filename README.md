@@ -46,3 +46,26 @@ Terraform uses **HCL (HashiCorp Configuration Language)** which is a simple decl
 These codes are declarative and can be maintained in a version control system.
 
 ### Declarative ?
+
+The code that we define is the **desired state that we want our infrastructure to be in**. Terraform will **take care of what is required to go from the current state to the desired state** without us having to worry about how to get there.
+
+Terraform works in 3 phases:
+
+1. **init**:
+   - Terraform initializes the process and identifies the providers to be used for the target environment.
+2. **plan**:
+   - Terraform graphs a plan to get to the target state from the current state.
+3. **apply**:
+   - Terraform makes the necessary changes required on the target environment ro bring it to the desired state.
+
+### Resource ?
+
+Every object that terraform manages is called a "**resource**". This can be a compute instance, a database server in the cloud or in a physical server.
+
+Terraform **manages the lifecycle of a resource from provisioning, to configuration to decommissioning**.
+
+Terraform records the state of the infrastructure as it is seen in the real world (in a file called terraform.tfstate) and based on this it can determine what actions to take when updating resources.
+
+Terraform can **ensure that the entire infrastructure is always in the defined state at all times**. State is blueprint of the infrastructure deployed by terraform.
+
+Terraform cloud and Terraform Enterprise provide additional features that allows simplifies collaboration between teams, managing infrastructure, improved security and centralized UI to manage terraform deployments.
