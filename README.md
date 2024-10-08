@@ -85,7 +85,7 @@ The following is are some examples for configuration files in terraform.
 
 ```hcl
 resource "local_file" "pet" {
-  filename = "/root/localfile/pet.txt"
+  filename = "/root/pet.txt"
   content = "We love pets!"
 }
 ```
@@ -113,3 +113,5 @@ Let's get the previous example of the local_file here as well.
 3. Before we are creating the resource we can see the execution plan that would be carried out by terraform, we can use the command `terraform plan`. This command will show the actions that will be carried out by terraform to create the resource. The resources that need to be created and need to be removed are shows using `+` and `-` signs. This includes all the arguments that we specified in the `.tf` file and there might be some default and optional arguments we didn't specifically declared as well. This step will not create the infrastructure resource yet, thins information is provided to the user to review and ensure that all the actions to be performed in this execution plan is desired.
 4. After the review we can create the resource. And to do this we make use of the `terraform apply` command. This command will display the execution plan once again and it will then ask the user to confirm by typing `yes` to proceed. Then it will proceed with the creation of the resource.
 5. We can use the `terraform show` within the configuration directory to see the details of the resource that we just created. This command inspects the state file and displays the resource details.
+
+#
