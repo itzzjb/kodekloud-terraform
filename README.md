@@ -80,3 +80,21 @@ HCL file consists of blocks and arguments. A **block is defined with in curly br
     key2 = value2
 }
 ```
+
+The following is are some examples for configuration files in terraform.
+
+```hcl
+resource "local_file" "pet" {
+  filename = "/root/localfile/pet.txt"
+  content = "We love pets!"
+}
+```
+
+```hcl
+resource "aws_instance" "webserver" {
+  ami = "ami-005fc0f236362e99f"
+  instance_type = "t2.micro"
+}
+```
+
+# Terraform Workflow
