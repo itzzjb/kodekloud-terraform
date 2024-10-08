@@ -114,4 +114,8 @@ Let's get the previous example of the local_file here as well.
 4. After the review we can create the resource. And to do this we make use of the `terraform apply` command. This command will display the execution plan once again and it will then ask the user to confirm by typing `yes` to proceed. Then it will proceed with the creation of the resource.
 5. We can use the `terraform show` within the configuration directory to see the details of the resource that we just created. This command inspects the state file and displays the resource details.
 
-#
+# Update and Delete Infrastructure
+
+Once we do a update to the `.tf` file like changing the name of the `pet.txt` file to `pets.txt`, from the output of `terraform plan` command we can see that the file will be replaced. `-/+` symbol in the resource plan implies that the resource will be deleted and re-created. This type of infrastructure is called a **_immutable infrastructure_**.
+
+If you want to go ahead with the change, use the `terraform apply` command to update. Upon confirmation the existing resource will be deleted and recreated. To delete the infrastructure completely, run the terraform destroy command. Same as `terraform apply` this shows the execution plan and you can see every resources and arguments have `-` in front of them. To go ahead with this you need to confirm `yes` with a prompt. This will delete all the resources in the current configuration directory.
