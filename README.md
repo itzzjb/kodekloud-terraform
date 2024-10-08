@@ -69,3 +69,14 @@ Terraform records the state of the infrastructure as it is seen in the real worl
 Terraform can **ensure that the entire infrastructure is always in the defined state at all times**. State is blueprint of the infrastructure deployed by terraform.
 
 Terraform cloud and Terraform Enterprise provide additional features that allows simplifies collaboration between teams, managing infrastructure, improved security and centralized UI to manage terraform deployments.
+
+# HCL
+
+HCL file consists of blocks and arguments. A **block is defined with in curly braces** and it **contains a set of arguments in key value pair format** representing the configuration data.
+
+```hcl
+<block> <parameters> {
+    key1 = value1
+    key2 = value2
+}
+```
