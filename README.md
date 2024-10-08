@@ -14,3 +14,19 @@
 2. Infrastructure costs are reduced when compared to additional data center management and human resources cost.
 3. Cloud infrastructure comes with support to APIs. And that opens up a whole new world of opportunity for automation.
 4. The built in auto scaling and elastic functionality of cloud infrastructure reduces resource wastage.
+
+# Infrastructure as Code (IaC)
+
+We can use the management console of various cloud providers. The better way to provision cloud infrastructure is to codify the entire provisioning process. This way we can write and execute code to define, provision, configure, update and destroy infrastructure resources. This is called **Infrastructure as Code** (IaC).
+
+It's not easy to manage shell script (or other types of scripts) that we can use to provision the infrastructure. It requires programming and development skills to build and maintain. There's a lot of logic you need to code and it's not reusable.
+
+That is where tools like **Terraform and Ansible** comes in. They help with code by making it easy to learn, human readable and easy to maintain. A large shell script can be converted into a simple terraform configuration file. This is written is a **human readable high level language**.
+
+# IaC Tools
+
+| Type                     |                  Examples                   | Description |
+| ------------------------ | :-----------------------------------------: | ----------: |
+| Configuration Management |         Ansible, Puppet, Salt Stack         |             |
+| Server Templating        | Docker, HashiCorp Packer, HashiCorp Vagrant |             |
+| Provisioning Tools       |    HashiCorp Terraform, Cloud Formation     |             |
