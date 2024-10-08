@@ -119,3 +119,17 @@ Let's get the previous example of the local_file here as well.
 Once we do a update to the `.tf` file like changing the name of the `pet.txt` file to `pets.txt`, from the output of `terraform plan` command we can see that the file will be replaced. `-/+` symbol in the resource plan implies that the resource will be deleted and re-created. This type of infrastructure is called a **_immutable infrastructure_**.
 
 If you want to go ahead with the change, use the `terraform apply` command to update. Upon confirmation the existing resource will be deleted and recreated. To delete the infrastructure completely, run the terraform destroy command. Same as `terraform apply` this shows the execution plan and you can see every resources and arguments have `-` in front of them. To go ahead with this you need to confirm `yes` with a prompt. This will delete all the resources in the current configuration directory.
+
+# Terraform providers
+
+After we write a terraform configuration file, the first thing to do is to initialize the directory with the `terraform init` command. When we run that command **_within a directory containing the configuration files_**, terraform downloads and installs plugins for the providers used within the configuration. This can be plugins for cloud providers such as AWS or something as simple as the local provider.
+
+Terraform uses a plugin based architecture to work with hundreds of such infrastructure platforms. Terraform providers are distributed by HashiCorp and are publicly available in the terraform registry at url [registry.terraform.io](registry.terraform.io).
+
+There are 3 tiers of providers.
+
+| Provider            | Examples                            | Description                                                                                                                          |
+| ------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Official Provider   | AWS, GCP, Azure, Local              | These are owned and maintained by HashiCorp.                                                                                         |
+| Verified Provider   | bigip, heroku, digitalocean         | These are owned and maintained by a third party technology company, that has gone through a partner provider process with HashiCorp. |
+| Community Providers | activedirectory, ucloud, netapp-gcp | These are published and maintained by individual contributors of the HashiCorp community.                                            |
