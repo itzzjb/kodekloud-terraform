@@ -276,3 +276,23 @@ Varible block can take 3 arguments. (**default, type, description**)
 
 ### List
 
+List is a numbered collection of values. We call it a numbered collection because **_each value/element can be referenced by the number or index within that list_**. The index of a list always begins at 0.
+
+These varibles can be accesed within a configuration file by using the index specified within the square brackets. 
+
+**main.tf**
+```hcl
+resource "random_pet" "my-pet" {
+    # we can use different values of the list through the index
+    prefix = var.prefix[0]
+}
+```
+**variables.tf**,
+```hcl
+variable "prefix" {
+    # these are the values we are a
+    default = ["Mr", "Mrs", "Sir"]
+    # We are specifying the type as list
+    type = list
+}
+```
