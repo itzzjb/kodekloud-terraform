@@ -328,4 +328,33 @@ variable "content" {
 }
 ```
 >[!NOTE]
-> If the data type incorrect after we implemented type constraint to lists and maps there will be an error in the outputs of `terraform plan` or `terraform apply` commands. 
+> If the data type incorrect after we implemented type constraint there will be an error in the outputs of `terraform plan` or `terraform apply` commands. 
+
+### Set
+
+The difference between a Set and a List is that **a Set cannot have duplicate elements**. 
+
+Trying to access a specific index of a set, which is not possible in Terraform. We need to convert it to a list.
+
+**main.tf**
+```hcl
+resource "random_pet" "my-pet" {
+    # Convert the set to a list and get the first element
+    prefix = tolist(var.prefix)[0]
+}
+```
+
+**variables.tf**
+```hcl
+variable "prefix-list" {
+    type = list(string)
+    # in lists we can use the same value multiple time
+    default = ["Mr", "Mr", "Mr"]
+}
+
+variable "prefix" {
+    type = set(string)
+    # in sets each value should be unique
+    default = [ "Mr", "Mrs", "Sir" ]
+}
+```
