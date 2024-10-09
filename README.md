@@ -363,6 +363,7 @@ variable "prefix" {
 
 With objects we can create complex data structures by combining all the variable types. 
 
+**variables.tf**
 ```hcl
 variable "bella" {
     # just like type = list(string)
@@ -389,3 +390,14 @@ variable "bella" {
 
 Tuple is similar to a list, and consists of a sequence of elements. The difference between a tuple and list is that list uses elements of the same variable type. But in case of **_we can make use of elements of different variable types_**. The type of variable to be used in a tuple is defined within the squre brackets. 
 
+**variables.tf**
+```hcl
+variable "kitty" {
+    # we can define the type of variables that we use in the tuple inside []
+    # the variables that need to be passed to this should exactly be 3 in number and of that specific type for it to work
+    type = tuple([string, number, bool])
+    default = ["cat", 7, true]
+}
+```
+
+Adding additional elements or incorrect type will result in an error as seen here. You will get an error in the output of the `terraform plan` or `terraform apply` command. 
