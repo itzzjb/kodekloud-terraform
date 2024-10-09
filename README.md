@@ -296,3 +296,9 @@ variable "prefix" {
     type = list
 }
 ```
+
+### Map
+
+In a map the data is **_represented in the format of key-value pairs_**. In the default value section we can have as many key-value pairs as needed. 
+
+To access a specific value from the within the terraform configuration file we can use key matching. 
