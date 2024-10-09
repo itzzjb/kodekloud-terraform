@@ -293,7 +293,7 @@ variable "prefix" {
     # these are the values we are a
     default = ["Mr", "Mrs", "Sir"]
     # We are specifying the type as list
-    type = list
+    type = list(string)
 }
 ```
 
@@ -302,3 +302,30 @@ variable "prefix" {
 In a map the data is **_represented in the format of key-value pairs_**. In the default value section we can have as many key-value pairs as needed. 
 
 To access a specific value from the within the terraform configuration file we can use key matching. 
+
+**main.tf**
+```hcl
+resource "local_file" "pet" {
+    filename = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/map-example/pet.txt"
+    # we need to use key matching to access the values of the map
+    # here we are using the value of the key statement2
+    content = var.content["statement2"]
+}
+```
+
+**variables.tf**
+```hcl
+variable "content" {
+    # We are specifying the type as map
+    # we can specify the data type of the map we want
+    type = map(string)
+    # we specify as many key value pairs enclosed within curly braces
+    default = {
+        # statement1 and statement2 are Keys and the data following them are Values
+        "statement1" = "We love pets!"
+        "statement2" = "We love animals!"
+    }
+}
+```
+>[!NOTE]
+> If the data type incorrect after we implemented type constraint to lists and maps there will be an error in the outputs of `terraform plan` or `terraform apply` commands. 
