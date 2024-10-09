@@ -1,0 +1,5 @@
+filename = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/variable-def-file-example/pet.txt"
+content = "We love Pets!"
+prefix = "Mrs"
+seperator = "."
+length = "2"

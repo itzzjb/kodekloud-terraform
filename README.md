@@ -442,3 +442,22 @@ terraform apply
 
 Here for one example, `TF_VAR_filename` sets the value of filename variable to value "/root/pets.txt". 
 
+### Variable Definition Files
+
+Finally **_when we are dealing with lots of variables_**, we can load values by using a variable definition file. These variable definition files can be named anything and always should end with `.tfvars` or `.tfvars,json`.
+
+If you use `terraform.tfvars` , `terraform.tfvars.json`, `*.auto.tfvars` or `*.auto.tfvars.json`, this file will be **automatically** picked up by Terraform. 
+
+If you use any other filename, such as `variables.tfvars` you will have to pass along that with a command line flag called `-var-file`.
+```sh
+terraform apply -var-file variables.tfvars
+```
+**terraform.tfvars**
+```hcl
+# This is using the same syntax as the hcl file, but only consists of variable assignments
+filename = "/root/pets.txt"
+content = "We love pets!"
+prefix = "Mrs"
+seperator = "."
+length = "2"
+```
