@@ -358,3 +358,34 @@ variable "prefix" {
     default = [ "Mr", "Mrs", "Sir" ]
 }
 ```
+
+### Objects
+
+With objects we can create complex data structures by combining all the variable types. 
+
+```hcl
+variable "bella" {
+    # just like type = list(string)
+    # but here instead of string we are giving a datastructure as a data type
+    # it's defined in another {}
+    type = object ({
+        name = string
+        color = string
+        age = number
+        food = list(string)
+        favourite_pet = bool
+    })
+    # setting the default values of the above specified fields
+    default = {
+        name = "bella"
+        color = "brown"
+        age = 7
+        food = ["fish", "chicken", "turkey"]
+        favourite_pet = true
+    }
+}
+```
+### Tuples
+
+Tuple is similar to a list, and consists of a sequence of elements. The difference between a tuple and list is that list uses elements of the same variable type. But in case of **_we can make use of elements of different variable types_**. The type of variable to be used in a tuple is defined within the squre brackets. 
+
