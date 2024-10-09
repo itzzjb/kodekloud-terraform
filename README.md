@@ -426,3 +426,19 @@ If we wan't we can also use command line flags with the `terraform apply` comman
 ```sh
 terraform apply -var "filename=/root/pets.txt" -var "content=We love Pets!" -var "prefix=Mrs" -var "separator=." -var "length=2"
 ```
+
+### Environment Variables
+
+We can also make use of environment variables.
+
+```sh
+export TF_VAR_filename="/root/pets.txt"
+export TF_VAR_content="We love pets!"
+export TF_VAR_prefix="Mrs"
+export TF_VAR_separator="."
+export TF_VAR_length="2"
+terraform apply
+```
+
+Here for one example, `TF_VAR_filename` sets the value of filename variable to value "/root/pets.txt". 
+
