@@ -419,3 +419,10 @@ variable "content" {
 ```
 When we run `terraform apply` now, **_we will be prompted to enter values for each variables used in an interactive mode_** one at a time.
 
+### Command line flags
+
+If we wan't we can also use command line flags with the `terraform apply` command. We can use the `-var "<variable_name>=<value>"`.
+
+```sh
+terraform apply -var "filename=/root/pets.txt" -var "content=We love Pets!" -var "prefix=Mrs" -var "separator=." -var "length=2"
+```
