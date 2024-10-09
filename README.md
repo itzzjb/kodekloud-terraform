@@ -253,11 +253,11 @@ Varible block can take 3 arguments. (**default, type, description**)
 
 **default** :
 
-- This is where we specify the default value for a variable.
+- This is where we specify the default value for a variable. This is also **_optional_**.
 
 **type**:
 
-- This is optional. But when used if enforces the type of variablle beign used. The basic types that can used are **_string, number, bool & any_**. If the type is not specified in the variable block it is set to the type **_any_** by default.
+- This is **_optional_**. But when used if enforces the type of variablle beign used. The basic types that can used are **_string, number, bool & any_**. If the type is not specified in the variable block it is set to the type **_any_** by default.
 - Besided these 3 main varible types terraform also supports additional data types such as **_list, map, object, tuple_**.
   | Type | Example |
   | --- | --- |
@@ -272,7 +272,7 @@ Varible block can take 3 arguments. (**default, type, description**)
 
 **descriptiom**:
 
-- This is optional. But it is a good practice to use this argument to describe what the variable is used for.
+- This is **_optional_**. But it is a good practice to use this argument to describe what the variable is used for.
 
 ### List
 
@@ -401,3 +401,21 @@ variable "kitty" {
 ```
 
 Adding additional elements or incorrect type will result in an error as seen here. You will get an error in the output of the `terraform plan` or `terraform apply` command. 
+
+# Different ways of using variables in Terraform
+
+### Interactive Mode
+
+In `variables.tf` the default value for the variables are options. You can keep them empty if needed.
+
+```hcl
+variable "filename" {
+    # default values are not defined
+}
+
+variable "content" {
+    # default values are not defined
+}
+```
+When we run `terraform apply` now, **_we will be prompted to enter values for each variables used in an interactive mode_** one at a time.
+
