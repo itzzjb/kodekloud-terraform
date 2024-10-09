@@ -461,3 +461,15 @@ prefix = "Mrs"
 seperator = "."
 length = "2"
 ```
+>[!NOTE]
+> We can use any of the options above to assign values to the variables, but if we use multiple ways to assign values to the same variable terraform follows a **_variable definition precedence_** to understand which value it should accept. 
+
+**Order of Acceptance**
+| Order | Option |
+| --- | --- |
+| 1 | Environment Variables |
+| 2 | terraform.tfvars |
+| 3 | *.auto.tfvars (alphebetical order) |
+| 4 | -var or -var-file (command line flags) |
+
+If **_every method is used, the -var of -var-file_** will be used.
