@@ -193,3 +193,54 @@ resource "random_pet" "my_pet" {
 ```
 
 Once you use the `terraform init` command only the providers that are not in the `.terraform/providers` will be downloaded and installed. Others will be reused.
+
+# Variables
+
+When writing configuration files for resources, we would need to assign values to different types of arguments. But harcoding values directly in the configuration files is not a good idea. It limits the reusability of the code which defeats the purpose of IaC. We must be **able to use the same code again and again based on a set of input variables that can be provided during the execution**. 
+
+To assign varibale we can make a new configuration file called `variables.tf`.
+
+**variable.tf**
+```hcl
+# We use the Variable block here
+# we are passing in the variable name after the block name
+# even though we give any name for the variable, we 
+variable "filename" {
+    # we are passing in the default value we are giving the variable
+    default = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/variables-example/pets.txt"
+}
+
+variable "content" {
+    default = "We love pets!"
+}
+
+variable "prefix" {
+    default = "Mr."
+}
+
+variable "separator" {
+    default = "."
+}
+
+variable "length" {
+    default = "1"
+}
+```
+
+**main.tf**
+```hcl
+# we can use the variables assigned in the variables.tf file in main.tf file
+# var.<variable_name>
+resource "local_file" "pet" {
+    filename = var.filename 
+    content = var.content
+}
+
+resource "random_pet" "my-pet" {
+    prefix = var.prefix
+    separator = var.separator
+    length = var.length
+}
+```
+
+Variables will be automatically assigned when we use the `terraform apply` command. If we want to make some updates to the resources by making changes to the existing arguments, we can do that by just updating the `variables.tf` file. The `main.tf` will not be modified. 
