@@ -174,7 +174,7 @@ There are multiple types of configuration files that can be created within a dir
 
 # Multiple Providers
 
-Terraform also allows to have multiple providers within the same configuration. 
+Terraform also allows to have multiple providers within the same configuration.
 
 ```hcl
 # local provider
@@ -196,15 +196,16 @@ Once you use the `terraform init` command only the providers that are not in the
 
 # Variables
 
-When writing configuration files for resources, we would need to assign values to different types of arguments. But harcoding values directly in the configuration files is not a good idea. It limits the reusability of the code which defeats the purpose of IaC. We must be **able to use the same code again and again based on a set of input variables that can be provided during the execution**. 
+When writing configuration files for resources, we would need to assign values to different types of arguments. But harcoding values directly in the configuration files is not a good idea. It limits the reusability of the code which defeats the purpose of IaC. We must be **able to use the same code again and again based on a set of input variables that can be provided during the execution**.
 
 To assign varibale we can make a new configuration file called `variables.tf`.
 
 **variable.tf**
+
 ```hcl
 # We use the Variable block here
 # we are passing in the variable name after the block name
-# even though we give any name for the variable, we 
+# even though we give any name for the variable, we
 variable "filename" {
     # we are passing in the default value we are giving the variable
     default = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/variables-example/pets.txt"
@@ -228,11 +229,12 @@ variable "length" {
 ```
 
 **main.tf**
+
 ```hcl
 # we can use the variables assigned in the variables.tf file in main.tf file
 # var.<variable_name>
 resource "local_file" "pet" {
-    filename = var.filename 
+    filename = var.filename
     content = var.content
 }
 
@@ -243,4 +245,34 @@ resource "random_pet" "my-pet" {
 }
 ```
 
-Variables will be automatically assigned when we use the `terraform apply` command. If we want to make some updates to the resources by making changes to the existing arguments, we can do that by just updating the `variables.tf` file. The `main.tf` will not be modified. 
+Variables will be automatically assigned when we use the `terraform apply` command. If we want to make some updates to the resources by making changes to the existing arguments, we can do that by just updating the `variables.tf` file. The `main.tf` will not be modified.
+
+# More about variable block
+
+Varible block can take 3 arguments. (**default, type, description**)
+
+**default** :
+
+- This is where we specify the default value for a variable.
+
+**type**:
+
+- This is optional. But when used if enforces the type of variablle beign used. The basic types that can used are **_string, number, bool & any_**. If the type is not specified in the variable block it is set to the type **_any_** by default.
+- Besided these 3 main varible types terraform also supports additional data types such as **_list, map, object, tuple_**.
+  | Type | Example |
+  | --- | --- |
+  | string | "/root/pets.txt" |
+  | number | 1 |
+  | bool | true/false |
+  | any | Default Value |
+  | list | ["cat", "dog"] |
+  | map | pet1 = cat pet2=dog |
+  | object | Complex Data Structure |
+  | tuple | Complex Data Structure |
+
+**descriptiom**:
+
+- This is optional. But it is a good practice to use this argument to describe what the variable is used for.
+
+### List
+
