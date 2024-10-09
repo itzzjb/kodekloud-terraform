@@ -247,7 +247,7 @@ resource "random_pet" "my-pet" {
 
 Variables will be automatically assigned when we use the `terraform apply` command. If we want to make some updates to the resources by making changes to the existing arguments, we can do that by just updating the `variables.tf` file. The `main.tf` will not be modified.
 
-# More about variable block
+## More about variable block
 
 Varible block can take 3 arguments. (**default, type, description**)
 
@@ -287,7 +287,7 @@ resource "random_pet" "my-pet" {
     prefix = var.prefix[0]
 }
 ```
-**variables.tf**,
+**variables.tf**
 ```hcl
 variable "prefix" {
     # these are the values we are a
