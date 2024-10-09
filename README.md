@@ -171,3 +171,25 @@ There are multiple types of configuration files that can be created within a dir
 | `variables.tf` | Contains variable declarations                         |
 | `outputs.tf`   | Contains outputs from the resources                    |
 | `provider.tf`  | Containers provider definition                         |
+
+# Multiple Providers
+
+Terraform also allows to have multiple providers within the same configuration. 
+
+```hcl
+# local provider
+resource "local_file" "pet" {
+    filename = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/multiple-example/pet.txt"
+    content = "We love pets!"
+}
+
+# random provider
+# this resource type provided by the random provider creates random pet name
+resource "random_pet" "my_pet" {
+  prefix = "Mr."
+  separator = "."
+  length = "1"
+}
+```
+
+Once you use the `terraform init` command only the providers that are not in the `.terraform/providers` will be downloaded and installed. Others will be reused.
