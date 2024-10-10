@@ -600,4 +600,18 @@ The final benefit of state is **_collaboration_** when working as a team. The te
 
 It's hightly recommended to save the the `terraform.tfstate` file in a **_remote repository_**. This allows the state to be shared between all the members of the team. 
 
-Example for remote state services are AWS S3, Google Cloud Storage, HashiCorp Closul and Terraform Cloud. 
+Example for remote state services are _AWS S3, Google Cloud Storage, HashiCorp Cloud , Terraform Cloud and etc._. 
+
+# Terraform State Considerations
+
+Terraform state is the **_single source of truth_** to terraform to understand what is deployed in the real world. Terraform state is a non-optional feature in terraform. 
+
+The state file contains **_sensitive information_**. So, we need to make sure that the state file is stored in a secure storage. The state file is **_not recommended to store in the git repository_**. Instead the state **_will be stored in a remote backend system_** like _AWS S3, Google Cloud Storage, HashiCorp Cloud, Terraform Cloud and etc._.
+
+State file is a json data structure that is meant to internal use within terraform. We should **_never manually attemt to edit status files by our selves_**.
+
+However, there would be **_situations where we want to make changes to the state file_** and in such cases we should rely on **_terraform state commands_**.
+
+
+
+
