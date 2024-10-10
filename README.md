@@ -612,6 +612,60 @@ State file is a json data structure that is meant to internal use within terrafo
 
 However, there would be **_situations where we want to make changes to the state file_** and in such cases we should rely on **_terraform state commands_**.
 
+# Terraform Commands
+
+```sh
+# this command is used to validate if the syntax of the configuration is correct
+terraform validate
+```
+
+```sh
+# this is the terraform format command
+# scans the configuration files of the current working directory and formats the code
+# this is useful to improve the readerbility of the configuration file
+terraform fmt
+```
+
+```sh
+# prinfts the current state of the infrastructure as seen by terraform
+terraform show
+# if you want to print the content on json formal we can use the -json flag
+terraform show -json
+```
+
+```sh
+# to see a list of all providers used in the configuration directory
+terraform providers
+```
+
+```sh
+# can use to copy the provider plugins needed for the current configuration to another directory
+terraform providers mirror /root/terraform/new_local_file
+```
+
+```sh
+# to print all output variables in the configuration directory
+terraform output
+# to print the value of a specific variable
+terraform output pet-name
+```
+
+```sh
+# used to sync terraform with the realworld infrastructure
+# if there is any change made to a resource created by terraform outside it's control such as a manual update
+# terraform pick it up and update the state file
+# this command won't modify any infrastructure resource, but it will modify the state file
+# this command will automatically run with commands like terraform plan and terraform apply
+terraform refresh
+```
+
+```sh
+# this is used to create a visual representation of the dependencies in a terraform configuration or an execution plan
+# this command can be run as soon as you have the configuration file ready even before you initialize the configuration with terraform init
+# this is generated in a format called dot
+# this is hard to comprehend as it is, might need to use a graph visualization software like graphiz to make more sense
+terraform graph
+```
 
 
 
