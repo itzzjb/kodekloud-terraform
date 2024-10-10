@@ -499,4 +499,30 @@ resource "random_pet" "my-pet" {
   length = var.length
 }
 ```
+# Resource Dependencies in Terraform
 
+We can link one resource to another rosource using reference attributes. When terraform creates these resources it knows about the dependency. For example as above, the local_file resource depends on random_pet resource. As a result, first terraform creates the random_pet resource and then it creates the local_file resource. When resources are deleted terraform deletes it on the reverce order.
+
+This types of dependency is called **_implicit dependency_**. We are not explicitly specifying which resource is dependant on which other resource. Terraform figures it out by it self. 
+
+There is another way to specify dependencies whithin the configuration file. 
+
+```hcl
+resource "local_file" "pets" {
+  filename = var.filename
+  content = var.content
+  # if there is no implicit dependency, we can create a explicit dependency as needed.
+  # we can do that by usinf depends_on argument
+  depends_on = [ 
+    # here are are mentioning the <resource_type>.<resource_name> that depends on
+    random_pet.my-pet 
+  ]
+}
+
+resource "random_pet" "my-pet" {
+  prefix = var.prefix
+  separator = var.seperator
+  length = var.length
+}
+```
+This type of dependency is called **_explicit dependency_**. Explicitly specifying a dependency is only neccesary **_when a resource relies on some other resource indirectly and it does not make use of a reference expression_**.

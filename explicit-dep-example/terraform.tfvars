@@ -1,0 +1,5 @@
+filename = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/explicit-dep-example/pet.txt"
+content = "We love Pets!"
+prefix = "Mr"
+seperator = "."
+length = "1"
