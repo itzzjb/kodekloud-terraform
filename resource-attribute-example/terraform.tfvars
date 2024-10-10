@@ -1,0 +1,5 @@
+filename = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/resource-attribute-example/pet.txt"
+content = "I love my Cat!"
+prefix = "Mr"
+seperator = "."
+length = "1"

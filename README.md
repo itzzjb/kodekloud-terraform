@@ -473,3 +473,11 @@ length = "2"
 | 4 | -var or -var-file (command line flags) |
 
 If **_every method is used, the -var of -var-file_** will be used.
+
+# Resource Attribute Reference
+
+In a real world scenario there will be multiple resources that depends on each other. We **_might need to get the output of one resource and use it as a input for another one_**. 
+
+You can use the documentation of the resource type from the terraform registry. In the **_attribute reference_** section you will be able to find the **_list of attributes return back from resource_** after you run `terraform apply`. 
+
+We can use these returning attributes of a resource in another resource.
