@@ -542,6 +542,7 @@ output "<variable_name>" {
 ```
 After declaring, once you run the `terraform apply` command the output variable will be printed in the screen.
 
+**main.tf**
 ```hcl
 resource "local_file" "pets" {
   filename = var.filename
@@ -575,3 +576,28 @@ terraform output pet-name
 The output variables are **_not used to get the output from one resource block as an input to another block_**. We can use reference expressions for that.
 
 The best use of terraform output variables is **_when you want to quickly display details about a provision resource_** on the screen. Or to **_feed the output variables to other iac tools_** like add-on script and ansible playbook. 
+
+# Purpose of State
+
+Terraform uses the state file to map the resource configuration to the real-world infrastructure. This **_allows terraform to create execution plans when a drift is identified between the resource configuration files and the state_**. 
+
+When terraform creates an entity it records it's identity in the state. Each resource created and managed by terraform would **_have a unique id which is used to identify the resources in the realworld_**. 
+
+The state file **_also tracks metadata details_** such as resource dependencies. When we applied these configuration using `terraform apply` command, the resources are creatred according to the implicit dependencies. And they will be deleted in the reverce order to avoid conflicts. You can clearly see those dependencies between resources in the `terraform.tfvars` file. 
+
+Another benefit of using state is **_performance_**. In the real world terraform would manage hundreds of thousands of resources. And these resources will be distributed to multiple providers specially in the cloud. So, it is not feasible to terraform to reconsile the state for every terraform operation. 
+
+This is because ot will take several minutes to terraform to fetch details from every single resource from all the providers. So, **_instead of reconsiling the terraform state can be used as the single source of truth_**. This would improve the performance significantly. Terraform stores the cashe of attribute values for all resources in the state. 
+
+We can specifically make terraform to refer to the state file alone while running commands and bypass having to refresh state every time. 
+```sh
+# we can use the --refresh=false here
+# terraform doesn't refresh state instrad it relies on the cashed attributes
+terraform plan --refresh=false
+```
+
+The final benefit of state is **_collaboration_** when working as a team. The terraform state file is stored in the same configuration directory in a file called `terraform.tfstate`. The state file resides in the folder or the directory in the end user's laptop. Every user in the **_team should always have the latest state data_** before running terraform, and need to **_make sure no body else run terraform at the same time_**.
+
+It's hightly recommended to save the the `terraform.tfstate` file in a **_remote repository_**. This allows the state to be shared between all the members of the team. 
+
+Example for remote state services are AWS S3, Google Cloud Storage, HashiCorp Closul and Terraform Cloud. 
