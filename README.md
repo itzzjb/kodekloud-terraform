@@ -484,6 +484,7 @@ We can use these returning attributes of a resource in another resource.
 
 **main.tf**
 ```hcl
+resource "local_file" "pet" {
   filename = var.filename
   # the random_pet resource will return a attribute called id as a output that contains the pet name
   # we can use that attribute called id here in the local_file resource
