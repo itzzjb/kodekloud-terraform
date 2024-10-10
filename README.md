@@ -481,3 +481,21 @@ In a real world scenario there will be multiple resources that depends on each o
 You can use the documentation of the resource type from the terraform registry. In the **_attribute reference_** section you will be able to find the **_list of attributes return back from resource_** after you run `terraform apply`. 
 
 We can use these returning attributes of a resource in another resource.
+
+**main.tf**
+```hcl
+  filename = var.filename
+  # the random_pet resource will return a attribute called id as a output that contains the pet name
+  # we can use that attribute called id here in the local_file resource
+  content = "My favourite pet is ${random_pet.my-pet.id}"
+  # You can use it directly like this as well
+  # content = random_pet.my-pet.id
+}
+
+resource "random_pet" "my-pet" {
+  prefix = var.prefix
+  separator = var.seperator
+  length = var.length
+}
+```
+
