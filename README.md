@@ -794,3 +794,17 @@ data "local_file" "dog" {
 | keyword: **resource** | keyword: **data** |
 | **Creates, Updates, Destroys** Infrastructure | Only **Reads** Infrastructure |
 | Also called **Managed Resources** | Also called **Data Resources** |
+
+# Version Constraints
+
+Providers use plugin based architecture. Most of the popular one are available in the public terraform registry.
+
+Without additional configuration `terraform init` command **_downloads the latest version of provider plugins_** that are needed by the configuration files.
+
+The functionality of a provider plugin may vary drastically from one version to another. Out terraform configuration may not work as expected when using a version different than the one it was written in. We can **_make sure that a specife version of the provider is used_** by terraform when we run the `terraform init` command. 
+
+The instruction to use a specific version of a provider is availble in the provider documentation of the registry. We can get the code block that we need to copy and paste in our configuration for a specific version of provider pluigin.
+
+Here a new block called `terraform` will be used configure settings related to terraform itself including providers. To use a specific version of a provider we need to use another block called `required_providers` inside the `terraform` block. Inside the `required_provider` block we can have multiple arguments for every provider that we use. 
+
+You can
