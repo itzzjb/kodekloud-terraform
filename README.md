@@ -783,7 +783,7 @@ resource "local_file" "pet" {
 # this can be any valid resouce type provided by any valid provider
 data "local_file" "dog" {
     # we can file the attributes that a local file exposes using the documentaion
-    filename = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/data-sources-example/datasource/dogs.txt"
+    filename = "/root/datasource/dogs.txt"
 }
 ```
 
