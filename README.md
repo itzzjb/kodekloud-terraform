@@ -621,7 +621,7 @@ terraform validate
 
 ```sh
 # this is the terraform format command
-# scans the configuration files of the current working directory and formats the code
+# scans the configuration files of the current working directory and formats the code to a canonical format
 # this is useful to improve the readerbility of the configuration file
 terraform fmt
 ```
@@ -667,5 +667,29 @@ terraform refresh
 terraform graph
 ```
 
+# Mutable vs Immutable Infrastructure
 
+When terraform updates a resource, it first destroys it and then recreates a new one. This is because terraform has a immutable infrastructure. 
+
+### Mutable
+
+Let's say we have a webserver running nginx. When a new verion of nginx releases we upgrade the software running on this webserver. This can be done using multiple ways. One simple approach is to download the desired version of mginx and use it to **_manually upgrade the software during a maintainance window_**. Also we can make use of tools such as configuration management tools such as ansible to achieve this. 
+
+For higher availablity, instead of relying on one web server we can have pool of web servers all running the same software and code. We would **_need to have the same software upgrade lifecycle for each of these servers using the same approach used for the first web server_**. This type of update is known as **_in place upgrade_**. And this is because the **_underline infrastructure remains the same but the software and the configuration on these servers change_** as part of the update. 
+
+When we try to upgrade the version of multiple servers, if for some reason one of the server might not get upgraded. So, overtime with multiple updates and changes to this pool of servers there is a posibility that each of these servers vary from one another. This is known as a **_Configuration drift_**. 
+
+This can leave the infrastucture in a complex state, making it difficult to plan and carry out subsequent upgrades. Troubleshooting issues will also be a difficult task. As each server would behave slightly different form the other because of the configuration drift. 
+
+### Immutable
+
+Instead of updating this software versions of the web servers, **_we can spin up new web servers with the updated software versions_**. Then, we can **_delete the old web server_**. If the update goes throught successfully the old web servers will be deleted. And the new ones with the new version of software will be there. 
+
+Immutable means **_unchanged_**. With immutable infrastructure we cannnot carry out in-place updates any more. 
+
+Even though we use the immutable infrastructure, it doesn't mean that updating web servers doesn't lead to failures. If the upgrade fails for any reason, the **_old web server will be left intact_**. The **_failed server will be removed_**. 
+
+As a result we **_don't leave much room for configuration drift to occur_** between our servers. Ensuring that it is left in a simple easy to understand state. 
+
+Terraform as a infrastucture provisioning tool uses this approach. 
 
