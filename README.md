@@ -711,6 +711,8 @@ resource "local_file" "pet1" {
     # this is one of the argumennt/rule that we can pass into the lifecycle block
     # this ensures that a new resource will be created first before deleting the old one.
     create_before_destroy = true
+    # lifecycle rule we applied caused the local file to the created first and the same file to be destroyed
+    # This goes to show that it is not always advisable to use this rule!
   }
 }
 
@@ -724,10 +726,9 @@ resource "local_file" "pet2" {
     # this is very useful for prevent resources from getting accidently deleted. 
     # for example a database resource may not be something we want to delete once it provisioned
     prevent_destroy = true
-    # note that the resouce will still be destroyed if we make use of the terrafrom destroy command
+    # note that the resouce will no be destroyed evrn if we make use of the terrafrom destroy command
   }
 }
-
 
 resource "local_file" "pet3" {
   filename = var.filename3
@@ -750,4 +751,15 @@ resource "local_file" "pet3" {
 | --- | --- | --- |
 | 1 | `create_before_destroy` | Creates the resource first and then destroy older |
 | 2 | `prevent_destroy` | Prevents destroy of a resource |
-| 3 | `ignore_changes` | Ignore changes to a resource attributes (specific/all) |
+| 3 | `ignore_changes` | Ignore changes to a resource attributes (specific/all) |\
+
+# Data Sources
+
+Data sources **_allows terraform to read attributes from resources which are provisioned outside it's control_**. We can use a **_data block_** within the configuration files. This is quiet similar to the resource block.
+
+```hcl
+data <resouce_name> {
+  # consists of specific arguments for a data source
+  <arguments>
+}
+```

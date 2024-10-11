@@ -7,6 +7,8 @@ resource "local_file" "pet1" {
     # this is one of the argumennt/rule that we can pass into the lifecycle block
     # this ensures that a new resource will be created first before deleting the old one.
     create_before_destroy = true
+    # lifecycle rule we applied caused the local file to the created first and the same file to be destroyed
+    # This goes to show that it is not always advisable to use this rule!
   }
 }
 
