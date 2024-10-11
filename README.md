@@ -807,4 +807,33 @@ The instruction to use a specific version of a provider is availble in the provi
 
 Here a new block called `terraform` will be used configure settings related to terraform itself including providers. To use a specific version of a provider we need to use another block called `required_providers` inside the `terraform` block. Inside the `required_provider` block we can have multiple arguments for every provider that we use. 
 
-You can
+You can create a seperate file called `providers.tf` to have these configuration.
+
+**providers.tf**
+```hcl
+# instead of the latest version 2.5.2 terraform will now download 2.4.0 version of the plugin
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+      version = "2.4.0"
+
+      # if we want to specificly as terraform to ask not to download a specific version
+      # version =  "!= 2.5.2" 
+      # So it now downloads the previous version available version 2.5.1
+
+      # if we want terraform to use a version lesser/higher than a given version
+      # we can use comparasion operators
+      # version "< 2.4.0"
+      # version "> 2.4.0"
+
+      # we can also combine multipe comparison operators together.
+      # version = "> 2.2.0, < 2.5.0 != 2.3.0"
+    }
+  }
+}
+
+provider "local" {
+  # Configuration options
+}
+```
