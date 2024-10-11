@@ -786,3 +786,11 @@ data "local_file" "dog" {
     filename = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/data-sources-example/datasource/dogs.txt"
 }
 ```
+
+### The difference beween data source and a resource
+
+| Resource | Data Source |
+| --- | --- |
+| keyword: **resource** | keyword: **data** |
+| **Creates, Updates, Destroys** Infrastructure | Only **Reads** Infrastructure |
+| Also called **Managed Resources** | Also called **Data Resources** |
