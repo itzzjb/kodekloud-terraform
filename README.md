@@ -693,3 +693,61 @@ As a result we **_don't leave much room for configuration drift to occur_** betw
 
 Terraform as a infrastucture provisioning tool uses this approach. 
 
+# Life Cycle Rules
+
+When terraform updates a resource, if **_first deletes the resource before creating a new one_** with the updated configuration. 
+
+Some times, this may not be a desirable approach for all cases. Sometimes we _may want the updated version of the resource to be created first before the older one is deleted_ or you _may not want to delete the resource at all_. This can be done using Life Cycle rules.
+
+These rules goes inside the resouce block as a new block called lifecycle. inside the lifecycle block we add the rule that we want terraform to adhere when creating resources.  
+
+```hcl
+resource "local_file" "pet1" {
+  filename = var.filename1
+  content = var.content
+  file_permission = var.file_permission
+  # we will add the life cycle rules here
+  lifecycle {
+    # this is one of the argumennt/rule that we can pass into the lifecycle block
+    # this ensures that a new resource will be created first before deleting the old one.
+    create_before_destroy = true
+  }
+}
+
+resource "local_file" "pet2" {
+  filename = var.filename2
+  content = var.content
+  file_permission = var.file_permission
+  lifecycle {
+    # by using this terraform will reject any changes that will result in resource getting destroyed when usign terraform apply command
+    # it will also give and error message as an output
+    # this is very useful for prevent resources from getting accidently deleted. 
+    # for example a database resource may not be something we want to delete once it provisioned
+    prevent_destroy = true
+    # note that the resouce will still be destroyed if we make use of the terrafrom destroy command
+  }
+}
+
+
+resource "local_file" "pet3" {
+  filename = var.filename3
+  content = var.content
+  file_permission = var.file_permission
+  lifecycle {
+    # this will prevent a resource from being updated based on a list of attributes that we define within the lifecycle block
+    # we can ignore changes to a resouce when specific attributes of the resouce changes
+    ignore_changes = [
+        # if the content or filename attribute of the resource is changed, all the changes will be ignored
+        content,filename
+    ]
+    # you can also ignore changes for changes done to any (all) argument
+    # ignore_changes =  all
+  }
+}
+```
+
+| Order | Option | Description |
+| --- | --- | --- |
+| 1 | `create_before_destroy` | Creates the resource first and then destroy older |
+| 2 | `prevent_destroy` | Prevents destroy of a resource |
+| 3 | `ignore_changes` | Ignore changes to a resource attributes (specific/all) |

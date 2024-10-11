@@ -1,0 +1,5 @@
+filename1 = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/lifecycle-rules-example/pet1.txt"
+filename2 = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/lifecycle-rules-example/pet2.txt"
+filename3 = "C:/Users/januda.bethmin.de.si/Desktop/kodekloud-terraform/lifecycle-rules-example/pet3.txt"
+content = "We love Pet!"
+file_permission = "0700"
